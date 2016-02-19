@@ -1,4 +1,4 @@
-voxelize
+voxelize (customized)
 ========
 Voxelize a triangulated mesh into an [ndarray](https://github.com/mikolalysenko/ndarray).
 
@@ -20,7 +20,7 @@ var resolution = result.resolution
 ## Install
 
     npm install voxelize
-    
+
 ### `require("voxelize")(cells, positions[, resolution])`
 Voxelizes a triangulated mesh into an ndarray
 
