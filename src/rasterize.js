@@ -16,7 +16,7 @@ var voxelCompare = new Function('a', 'b', [
   'return 0;'
 ].join('\n'));
 
-function rasterize(cells, positions, faceNormals) {
+function rasterize(cells, positions, faceNormals, removes) {
   if(cells.cells) {
     faceNormals = cells.faceNormals;
     positions = cells.positions;
@@ -30,10 +30,17 @@ function rasterize(cells, positions, faceNormals) {
     var d = signedDistance(grid, faceNormals, coord);
     if(isNaN(d) || Math.abs(d) > 1.0) {
       continue;
-    } else if(d < 0) {
-      result.push([coord[0], coord[1], coord[2], 1, -d]);
     } else {
-      result.push([coord[0], coord[1], coord[2], 0, d]);
+      var cells = grid.closestCells(coord).cells;
+      // for (var i=2000; i<8000; i++) {
+      //   if (cells.indexOf(i) !== -1) d = 0;
+      // }
+      if (cells[0]%2 == 0) d = 0;
+      if(d < 0) {
+        result.push([coord[0], coord[1], coord[2], 1, -d]);
+      } else {
+        result.push([coord[0], coord[1], coord[2], 0, d]);
+      }
     }
   }
   result.sort(voxelCompare);

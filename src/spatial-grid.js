@@ -206,6 +206,7 @@ function fill_rec(grid, lo, hi, c, n, coord) {
 
 function fill(grid, lo, hi, c) {
   var n = lo.length;
+  // => 3
   switch(n) {
     case 0:
       //Do nothing

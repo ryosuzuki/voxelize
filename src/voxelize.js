@@ -3,7 +3,7 @@
 var rasterize = require('./rasterize')
 var rle2array = require('./rle2array')
 
-function voxelize(cells, positions, resolution) {
+function voxelize(cells, positions, resolution, removes) {
   var lo = [Infinity, Infinity, Infinity],
       hi = [-Infinity, -Infinity, -Infinity],
       n  = positions.length, i, j, p
@@ -28,10 +28,11 @@ function voxelize(cells, positions, resolution) {
     }
     npositions[i] = p
   }
-  var volume = rasterize(cells, npositions)
+  var volume = rasterize(cells, npositions, removes)
   var result = rle2array(volume)
   return {
     voxels: result.phase,
+    distance: result.distance,
     origin: shift,
     resolution: resolution
   }
